@@ -7,11 +7,12 @@ serialTypes=[]
 SEARCHAPI_KEY="XXXXXX" 
 
 url='http://ulrichsweb.serialssolutions.com/api/{}/search?version=1.2&operation=searchRetrieve&query={}&maximumRecords=10'
+# can change max records up to 50, the max number of returned records per row, details in the below links
 
 # more details about available url can check: https://knowledge.exlibrisgroup.com/Ulrich's/Product_Documentation/Configuring/Ulrichsweb_API/Ulrichsweb%3A_Using_the_Ulrichsweb_API
 # and http://ulrichsweb.serialssolutions.com/api-ui.html
 
-for i in range(0, 100): # the website shows each query has max 50 data records, but here I use loop seem get around that
+for i in range(0, 100): 
     resp = requests.get(url.format(SEARCHAPI_KEY, wos_pub.loc[i]['SO']), # input journal titles
                     headers={'Accept':'application/json'})
     result=resp.json()
