@@ -1,1 +1,1 @@
-a python request to retrieve ISSNs with journal title query with Ulrich's API
+a python request to retrieve ISSNs with journal title using Ulrich's API
