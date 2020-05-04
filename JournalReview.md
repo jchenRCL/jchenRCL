@@ -1,1 +1,1 @@
-a python request to retrieve ISSNs with journal title using Ulrich's API
+These scripts are used for reviewing journal data. They include code for requesting ISSNs for Ulrich and matching WOS publication
