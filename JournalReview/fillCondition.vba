@@ -1,11 +1,11 @@
+Option Explicit
+
 Sub FillWorkingCy_new()
 
 Dim wb As ThisWorkbook
 Dim worksheets As Worksheet
 Dim i, j As Variant
 Dim s1_range, s2_range, u1_range, u2_range As Range
-'Dim c1, c2, c3 As Range
-
 
 Set s1_range = ThisWorkbook.worksheets("Simple Working Subs").Range("C2:C3535") 's_title number
 Set u1_range = ThisWorkbook.worksheets("Use").Range("F2:F403") ' u_usage
