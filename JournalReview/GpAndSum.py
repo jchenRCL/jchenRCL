@@ -1,7 +1,7 @@
 def GpAndSum(data):
     
     # if no Fund Code replace the value with 'TBD'
-    data['Fund Code']=data['Fund Code'].apply(lambda x: x=='TBD' if x == '' else x)
+    PCode['Fund Code']=PCode['Fund Code'].fillna('TBD')
     data_c = pd.DataFrame() # grouped cost
     data_u = pd.DataFrame() # grouped usage
     data_f = pd.DataFrame() # grouped fund
@@ -10,6 +10,8 @@ def GpAndSum(data):
     data_f = data.groupby(data['Publisher Package'].str.lower()).apply(lambda x: ','.join((x['Fund Code']).unique()))
     data_f=data_f.to_frame().reset_index()
     data_f.columns=['Publisher Package', 'Fund Code']
+    data_f['Fund Code']=data_f['Fund Code'].apply(lambda x: x.replace('0', '')) # replace 0 with blank
+    data_f['Fund Code']=data_f['Fund Code'].apply(lambda x: x.replace(',,.,','')) # replace trailing commas
     
     # combine them together
     # first reset index
@@ -19,7 +21,7 @@ def GpAndSum(data):
     # concatenation, axis =1 means column concatenation
     data_gped = pd.concat([data_u, data_c, data_f], axis=1)
     
-    # drop duplicated columns
+    # droup duplicated columns
     data_gped=data_gped.loc[:,~data_gped.columns.duplicated()]
     
     # calculate Cost Per Use
