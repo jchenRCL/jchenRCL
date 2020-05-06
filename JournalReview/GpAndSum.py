@@ -19,7 +19,7 @@ def GpAndSum(data):
     # concatenation, axis =1 means column concatenation
     data_gped = pd.concat([data_u, data_c, data_f], axis=1)
     
-    # droup duplicated columns
+    # drop duplicated columns
     data_gped=data_gped.loc[:,~data_gped.columns.duplicated()]
     
     # calculate Cost Per Use
