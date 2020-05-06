@@ -35,5 +35,18 @@ def GpAndSum(data):
         else:
             data_gped.loc[i, 'Cost Per Use on All Platforms (USD)'] = \
                 np.round(data_gped.loc[i]['Total Cost']/data_gped.loc[i]['Usage on All Platforms'], 2)
+            
+            
+        ## change package names as upper
+    
+    data_gped['Publisher Package']=data_gped['Publisher Package'].apply(lambda x: x.upper())
+    
+    ## if Total Cost and Cost Per Use on All Platforms (USD) not np.nan, add $
+    
+    data_gped['Cost Per Use on All Platforms (USD)']= ['$'+str(x) for x in data_gped['Cost Per Use on All Platforms (USD)']\
+                                                      if x != np.nan]
+    
+    data_gped['Total Cost']= ['$'+str(x) for x in data_gped['Total Cost']\
+                                                      if x != np.nan]
     
     return data_gped
