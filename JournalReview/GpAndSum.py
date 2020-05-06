@@ -21,7 +21,19 @@ def GpAndSum(data):
     
     # calculate Cost Per Use
     
-    data_gped['Cost Per Use on All Platforms (USD)'] = \
-    np.round(data_gped['Total Cost']/data_gped['Usage on All Platforms'], 2)
+    # calculate Cost Per Use
+    # if usage is 0, then fill Total Cost
+    # if usage is NA, then fill NA
+    # else divide total cost by total usage and round to the second precision
+    
+    for i in range(0, len(data_gped)):
+        if data_gped.loc[i]['Usage on All Platforms']==0: # usage is 0
+            data_gped.loc[i, 'Cost Per Use on All Platforms (USD)']= \
+                data_gped.loc[i]['Total Cost']
+        elif data_gped.loc[i]['Usage on All Platforms'] == "NA": # usage is np.nan
+            data_gped.loc[i, 'Cost Per Use on All Platforms (USD)']= "NA"
+        else:
+            data_gped.loc[i, 'Cost Per Use on All Platforms (USD)'] = \
+                np.round(data_gped.loc[i]['Total Cost']/data_gped.loc[i]['Usage on All Platforms'], 2)
     
     return data_gped
