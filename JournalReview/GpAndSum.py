@@ -32,6 +32,7 @@ def GpAndSum(data):
             data_gped.loc[i, 'Cost Per Use on All Platforms (USD)']= \
                 data_gped.loc[i]['Total Cost']
         elif data_gped.loc[i]['Usage on All Platforms']=='': # usage is np.nan
+            data_gped.loc[i, 'Usage on All Platforms']==np.nan
             data_gped.loc[i, 'Cost Per Use on All Platforms (USD)']= np.nan
         else:
             data_gped.loc[i, 'Cost Per Use on All Platforms (USD)'] = \
@@ -41,12 +42,28 @@ def GpAndSum(data):
     
     data_gped['Publisher Package']=data_gped['Publisher Package'].apply(lambda x: x.upper())
     
+    ## round Total Cost to 2nd precision
+    
+    data_gped['Total Cost']=data_gped['Total Cost'].apply(lambda x: np.round(x, 2))
+    
+    ## change data types to string
+    
+    data_gped['Total Cost']=data_gped['Total Cost'].apply(lambda x: str(x)) 
+    data_gped['Cost Per Use on All Platforms (USD)']=\
+    data_gped['Cost Per Use on All Platforms (USD)'].apply(lambda x: str(x)) 
+    
     ## if Total Cost and Cost Per Use on All Platforms (USD) not np.nan, add $
     
-    data_gped['Cost Per Use on All Platforms (USD)']= \
-    data_gped['Cost Per Use on All Platforms (USD)'].apply(lambda x: '$ '+str(x) if (x != 'nan') else x)
+    s=[]
+    for i in data_gped['Cost Per Use on All Platforms (USD)']:
+        if i != "nan":
+            s.append('$ '+ str(i))
+        else:
+            s.append(i)
+            
+    data_gped.loc[:, 'Cost Per Use on All Platforms (USD)']=s
     
-    data_gped['Total Cost']= \
-    data_gped['Total Cost'].apply(lambda x: '$ '+str(x) if (x != 'nan') else x)
+    data_gped['Total Cost']=\
+    data_gped['Total Cost'].apply(lambda x: '$ '+str(x) if x != np.nan else x)
     
     return data_gped
