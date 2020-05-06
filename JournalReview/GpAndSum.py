@@ -51,6 +51,8 @@ def GpAndSum(data):
     data_gped['Total Cost']=data_gped['Total Cost'].apply(lambda x: str(x)) 
     data_gped['Cost Per Use on All Platforms (USD)']=\
     data_gped['Cost Per Use on All Platforms (USD)'].apply(lambda x: str(x)) 
+    data_gped['Usage on All Platforms']=\
+    data_gped['Usage on All Platforms'].apply(lambda x: str(x)) 
     
     ## if Total Cost and Cost Per Use on All Platforms (USD) not np.nan, add $
     
