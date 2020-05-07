@@ -1,8 +1,8 @@
 def sort_nona(data):
     
     # excluding "Ebsco" may only apply to p-code, need to check
-    # excldue Publisher Package startswith "Ebsco" ("EBSCO"). it is not case sensitive here
-    data = data[data['Publisher Package'].apply(lambda x: not str(x).startswith('Ebsco'))] 
+    # excldue Publisher Package startswith "EBSCO"
+    data = data[data['Publisher Package'].apply(lambda x: not str(x).startswith('EBSCO'))] 
     data.reset_index(inplace=True, drop=True)
     
     # first exclude nan data records and save them
