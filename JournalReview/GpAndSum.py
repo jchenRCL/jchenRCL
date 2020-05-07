@@ -1,7 +1,7 @@
 def GpAndSum(data):
     
     # if no Fund Code replace the value with 'TBD'
-    PCode['Fund Code']=PCode['Fund Code'].fillna('TBD')
+    data['Fund Code']=data['Fund Code'].fillna('TBD')
     data_c = pd.DataFrame() # grouped cost
     data_u = pd.DataFrame() # grouped usage
     data_f = pd.DataFrame() # grouped fund
