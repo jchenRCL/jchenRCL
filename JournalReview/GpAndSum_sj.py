@@ -1,5 +1,4 @@
-def GpAndSum_S(data):
-    
+def GpAndSum_S(data):    
     # if no Fund Code replace the value with 'TBD'
     PCode['Fund Code']=PCode['Fund Code'].fillna('TBD')
     data_c = pd.DataFrame() # grouped cost
