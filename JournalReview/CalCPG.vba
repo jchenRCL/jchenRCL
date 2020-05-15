@@ -1,4 +1,3 @@
-Option Explicit
 
 Sub CalCPG()
 Dim Workbook As ThisWorkbook
@@ -15,7 +14,7 @@ Set c_range = ThisWorkbook.Worksheets("Simple Working Subs").Range("F2:F3534")
 Set u_range = ThisWorkbook.Worksheets("Simple Working Subs").Range("G2:G3534")
 Set cpg_range = ThisWorkbook.Worksheets("Simple Working Subs").Range("H2:H3534")
 
-For i = 1 To 3535
+For i = 1 To 3534
     If IsEmpty(u_range.Cells.Rows(i).Value) Or _
         IsNull(u_range.Cells.Rows(i).Value) Or _
         u_range.Cells.Rows(i).Value = "NA" Or _
@@ -29,6 +28,11 @@ For i = 1 To 3535
         cpg_range.Cells.Rows(i).Value = Round((c_range.Cells.Rows(i).Value / u_range.Cells.Rows(i).Value), 2)
     End If
 Next i
-        
+
+For i = 1 To 3534
+    If cpg_range.Cells.Rows(i).Value = "NA" Then
+        cpg_range.Cells.Rows(i).Interior.Color = 65535
+    End If
+Next i
 
 End Sub
