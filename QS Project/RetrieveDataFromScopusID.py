@@ -10,7 +10,7 @@ scopus_id = []
 author_name = []
 affiliation = []
 
-for k in range(0, 5): # specify a range, 200 maximum for each request
+for k in range(, ): # 200 is the maximum for each request
     name=[]
     aff=[]
 
@@ -29,11 +29,20 @@ for k in range(0, 5): # specify a range, 200 maximum for each request
             for i in range(0, len(result['abstracts-retrieval-response']['item']['bibrecord']['head']['author-group'])):
                 an=[]
                 af=[]
-                an.append(result['abstracts-retrieval-response']['item']['bibrecord']['head']['author-group'][i]\
-                       ['author'][0]['preferred-name']['ce:given-name']+ ' , ' + result['abstracts-retrieval-response']\
-                      ['item']['bibrecord']['head']['author-group'][i]['author'][0]['preferred-name']['ce:surname'])
                 af.append(result['abstracts-retrieval-response']['item']['bibrecord']['head']['author-group'][i]\
-                              ['affiliation']['organization'])
+                            ['affiliation']['organization'])
+                if result['abstracts-retrieval-response']['item']['bibrecord']['head']['author-group'][i]\
+                ['author'][0]['preferred-name']['ce:given-name'] is None:
+                    an.append(result['abstracts-retrieval-response']['item']['bibrecord']['head']\
+                              ['author-group'][i]['author'][0]['preferred-name']['ce:surname'])
+                elif result['abstracts-retrieval-response']['item']['bibrecord']['head']\
+                ['author-group'][i]['author'][0]['preferred-name']['ce:surname'] is None:
+                    an.append(result['abstracts-retrieval-response']['item']['bibrecord']['head']['author-group'][i]\
+                       ['author'][0]['preferred-name']['ce:given-name'])
+                else:
+                    an.append(result['abstracts-retrieval-response']['item']['bibrecord']['head']['author-group'][i]\
+                       ['author'][0]['preferred-name']['ce:given-name']+ ' , ' + result['abstracts-retrieval-response']\
+                      ['item']['bibrecord']['head']['author-group'][i]['author'][0]['preferred-name']['ce:surname']
                 
                 name.append(','.join(an))
                 aff.append(af)
@@ -58,5 +67,4 @@ df = pd.DataFrame({
     'affiliation': affiliation
 })
 
-df.to_excel("2020_rochester_et_1.xlsx", index=False, engine='xlsxwriter')
-
+df.to_excel("2020_rochester_et_5.xlsx", index=False, engine='xlsxwriter')
