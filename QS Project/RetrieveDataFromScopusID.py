@@ -17,7 +17,6 @@ for k in range(1205, 1405): # 200 is the maximum for each request from my experi
                     headers={'Accept':'application/json',
                              'X-ELS-APIKey': MY_API_KEY})
     result=resp.json()    
-#    scopus_id.append(scopus.loc[k]['scopus_id'])
     
     try: 
         if 'abstracts-retrieval-response' in result:
