@@ -1,6 +1,6 @@
 url='https://api.elsevier.com/content/abstract/scopus_id/{}'
 
-MY_API_KEY="XXXXXXXXXXXX"
+MY_API_KEY="XXXXXXXXXXXXXX"
 
 af=[]
 au1=[]
@@ -11,16 +11,17 @@ pub_date = []
 citedby_cnt = []
 
 
-for k in range(1105, 1305): # 200 is the maximum for each request
+for k in range(1205, 1405): # 200 is the maximum for each request from my experience, but you can try. It won't break
     
     resp = requests.get(url.format(scopus.loc[k]['scopus_id']),
                     headers={'Accept':'application/json',
                              'X-ELS-APIKey': MY_API_KEY})
     result=resp.json()    
-    scopus_id.append(scopus.loc[k]['scopus_id'])
+#    scopus_id.append(scopus.loc[k]['scopus_id'])
     
     try: 
         if 'abstracts-retrieval-response' in result:
+            scopus_id.append(scopus.loc[k]['scopus_id'])
             l=[]
             q=[]
             eid.append(result['abstracts-retrieval-response']['coredata']['eid'])
@@ -147,8 +148,9 @@ for k in range(1105, 1305): # 200 is the maximum for each request
                                                                     for h in range(0, len(n)):
                                                                         q.append(n[h])
                                                     
-        au1.append(str(q).strip('\] \['))
-        af.append(str(l).strip('\] \['))
+        
+            au1.append(q)
+            af.append(l)
         
     except ValueError:
         
@@ -168,4 +170,5 @@ df=pd.DataFrame({'Title': cit_title,
                 'pub_date': pub_date,
                 'citedby_cnt': citedby_cnt})
 
-df.to_excel("2020_rochester_et_new_11.xlsx", index=False, engine='xlsxwriter')
+df.to_excel("2020_rochester_et_new_12.xlsx", index=False, engine='xlsxwriter') # you may save as csv per your preference
+
