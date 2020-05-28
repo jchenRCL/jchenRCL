@@ -1,5 +1,6 @@
 **Projects for RCL
 
-* Journal Review: The code is for Journal Review 2020 project, including vba and python code
+* [Journal Review](https://github.com/jchenRCL/jchenRCL/tree/master/JournalReview): 
+These scripts are used for reviewing journal data. They include code for requesting ISSNs for Ulrich and matching WOS publication
 
-* QS Project: The code is for QS Project
+* [QS Project](https://github.com/jchenRCL/jchenRCL/tree/master/QSProject): The code is for QS Project
