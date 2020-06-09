@@ -11,7 +11,7 @@ def get_ratio_lib2(data1, data2):
     try:
         for i in range(0, len(data1)):
             for j in range(0, len(data2)):
-                alma.append(data1.loc[i]['Title3']) # append Alma titles
+                alma.append(data1.loc[i]['Title3']) # append Alma titles, here Title3 is Alma title, Name1 is LibGuides'
                 if fuzz.token_set_ratio(data1.loc[i]['Title3'], data2.loc[j]['Name1']) > 70 : # here we use 70 as a threshold value
                     lib.append(data2.loc[j]['Name1'])
                     ratio.append(fuzz.token_set_ratio(data1.loc[i]['Title3'], data2.loc[j]['Name1']))
