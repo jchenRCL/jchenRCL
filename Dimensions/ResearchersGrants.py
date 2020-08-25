@@ -56,7 +56,7 @@ Natalie_grants['last_name'] =ur_researchers.iloc[0,:]['last_name']
 chuck = []
 
 for i in range(len(ur_researchers)):
-    chuck.append(json_normalize(ur_researchers.iloc[i,:]['research_orgs']))
+    chuck.append(pd.json_normalize(ur_researchers.iloc[i,:]['research_orgs']))
 
 test_df = pd.concat(chuck)
 
