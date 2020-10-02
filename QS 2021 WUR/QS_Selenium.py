@@ -8,12 +8,14 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support.expected_conditions import presence_of_element_located
 import time
 import sys
+import pandas as pd
+import csv
 import unittest
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver import ActionChains
  
-# Invoke a new Chrome Instance
+# Invoke a new Firefox Instance
 ff_driver = webdriver.Chrome()
  
 # Blocking wait of 30 seconds in order to locate the element
@@ -41,12 +43,21 @@ ActionChains(ff_driver) \
 # Sleep for 10 seconds in order to see the results
 time.sleep(10)
  
+ 
 results =  ff_driver.find_elements_by_class_name('criteria')
 
+key = []
+value = []
 for quote in results:
     quoteArr = quote.text.split('\n')
-    print(quoteArr)
-    print()
+    for line in quoteArr:
+        key.append(str(line).split(':')[0])
+        value.append(str(line).split(':')[1])
+        data = pd.DataFrame({'key': key, 'value': value})
+        print(quoteArr)
+        print()
+    
+    data.to_csv('test_output.csv', index = False)
 
 # Close the Browser instance
 ff_driver.close()
