@@ -19,8 +19,6 @@ from selenium.webdriver import ActionChains
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import StaleElementReferenceException
 from selenium.webdriver.support import expected_conditions
-
-
  
 # Invoke a new Chrome Instance
 ff_driver = webdriver.Chrome()
