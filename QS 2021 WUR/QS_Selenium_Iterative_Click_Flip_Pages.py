@@ -1,4 +1,4 @@
-# line 15, 19-27 inspired from Stackoverflow
+# line 15, 19-27 inspired by Stackoverflow
 
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
