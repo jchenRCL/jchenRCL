@@ -74,18 +74,7 @@ for idx, link in enumerate(links):
 
 ff_driver.close()
 
-data = pd.read_csv("test_output_5.csv")
-data.columns = ['Index', 'Name', 'Key', 'Value']
-data1 = data.pivot(index="Index", columns="Key",values="Value")
-data2 = data.pivot(index="Name", columns="Key",values="Value")
-data2.reset_index(inplace=True)
-data1.reset_index(inplace=True)
-data2['Rank'] = data1['Index']
-data2.set_index('Rank', inplace=True, drop=True)
-data2.reset_index(inplace=True)
 
-cd "C:\Users\jchen148\QS\2021 Ranking\QS 2021 Official Publish"
-data2.to_csv("QS_top_200_uni_details_new_reformat.csv")
 		     
 
 
