@@ -63,7 +63,8 @@ for idx, link in enumerate(links):
         with open(r'test_output_5.csv', 'a', newline='') as csvfile: ## have to create an empty csv file in the repo beforehand
             fieldnames = ['ranking', 'name','criteria', 'values']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-            writer.writerow({'ranking':index,'name':name, 'criteria':cri, 'values': values})           
+            for x, y in zip(cri, values):
+                writer.writerow({'ranking':index,'name':name, 'criteria': x, 'values': y})            
     
     except(TimeoutException):
         pass
