@@ -19,12 +19,12 @@ def getUniDetails(unilist, year = 2020, page = 40):
     time.sleep(2)
     ff_driver.get(url)
     time.sleep(5)
-    
+
     button = ff_driver.find_element_by_class_name("quicktabs-tab-rankings_tabs-1")
     ff_driver.execute_script("arguments[0].click();", button)
     ff_driver.implicitly_wait(10)    
+    
     if page <= 40:    
-# loop through 40 pages
         for _ in range(int(page)):
             soup = BeautifulSoup(ff_driver.page_source, "html.parser")
             x = soup.find(attrs={"id" : "qs-rankings-indicators_wrapper"})
@@ -72,16 +72,14 @@ def getUniDetails(unilist, year = 2020, page = 40):
                     pass
                 print([rank, unis, o_score, cit_fac, intl_students, intl_faculty, fac_student, employer_rep, ac_reputation])    
                 unilist.append([rank, unis, o_score, cit_fac, intl_students, intl_faculty, fac_student, employer_rep, ac_reputation])                           
-
-                # click next page
-                element = ff_driver.find_element_by_xpath('//*[@id="qs-rankings-indicators_next"]')
-                ff_driver.execute_script("arguments[0].click();", element)
-                time.sleep(5)
+            element = ff_driver.find_element_by_xpath('//*[@id="qs-rankings-indicators_next"]')
+            ff_driver.execute_script("arguments[0].click();", element)
+            time.sleep(5)
                 
     else:
         print("Max Page is 40. ")
-        
-    ff_driver.close()
+
+    ff_driver.quit()
     return unilist
 
 def get_uni_details_dataframe(year=2020, page=40):
@@ -91,13 +89,12 @@ def get_uni_details_dataframe(year=2020, page=40):
     df.columns = ["ranking", "uni", "overall_score", "citations_faculty", "international_students", "international_faculty", "faculty_student", "employer_reputation", \
     "academic_reputation"]
     df.reset_index(drop=True)
-    
-    # Dataframe preprocessing
+
     df["ranking"] = [int(x)+1 for x in range(len(df))]
     df["uni"] = df["uni"].map(str)
     
     return df
 
 
-qs_2020_data = get_uni_details_dataframe(year=2020, page = 40)
-qs_2020_data.to_excel("QS_2020_Unis_Details.xlsx", index= False)
+qs_2020_data = get_uni_details_dataframe(year=2020, page = 8)
+qs_2020_data.to_csv("file_name.csv", index= False)
