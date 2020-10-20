@@ -22,7 +22,7 @@ def get_uni_information(unilist, page=62):
 
     ff_driver.implicitly_wait(10) 
     
-    # Crawl all the pages (max page is 40)
+    # Crawl all the pages (max page is 62)
     if page <= 62: 
         for _ in range(int(page)):
             # Use BeautifulSoup to parse every page
@@ -78,7 +78,7 @@ def get_uni_information(unilist, page=62):
             ff_driver.execute_script("arguments[0].click();", element)
             time.sleep(5)
     else:
-        print("Max page is 40.")
+        print("Max page is 62.")
     
     ff_driver.quit()
     return unilist
