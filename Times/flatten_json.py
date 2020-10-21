@@ -39,7 +39,7 @@ for uid in join_result['University Id'][:50]:
                 else:
                     result = data['results']
                     output = pd.json_normalize(flatten_json(result))
-            except ValueError:
+            except (ValueError, KeyError):
                 pass
 df = pd.DataFrame(output)
 df.to_csv("the_file_name.csv", index= False)
