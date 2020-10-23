@@ -37,4 +37,4 @@ for the_id in [32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42]:
             
             
 df = pd.DataFrame({'Uni Name': university, 'Metrics': metric_type, 'THE code': the_code, 'Metric Value': value})
-df.to_csv("the_file_name.csv")
+df.to_csv("the_file_name.csv", index = False)
